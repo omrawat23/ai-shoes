@@ -112,7 +112,7 @@ const Navbar = () => {
           <Link to="/cart">
           <MenuItem>CART
 
-             < Badge badgeContent={quantity}  color="primary">
+             < Badge overlap="rectangular" badgeContent={quantity}  color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
