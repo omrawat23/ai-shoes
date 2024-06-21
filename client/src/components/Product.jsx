@@ -48,6 +48,12 @@ const Image = styled.img`
   z-index: 2;
 `;
 
+const Images = styled.img`
+  width: 10%;
+  height: 10%;
+`;
+
+
 const Icon = styled.div`
   width: 40px;
   height: 40px;
@@ -70,16 +76,17 @@ const Product = ({ item }) => {
       <Circle />
       <Image src={item.img} />
       <Info>
-        <Icon>
-          {/* <ShoppingCartOutlined /> */}
+        <Icon><Images>
+          <img src="/img/search.png" />
+          </Images>
         </Icon>
         <Icon>
           <Link to={`/product/${item._id}`}>
-          {/* <SearchOutlined /> */}
+          <img src="/img/search.png" />
           </Link>
         </Icon>
         <Icon>
-          {/* <FavoriteBorderOutlined /> */}
+        <img src="/img/search.png" />
         </Icon>
       </Info>
     </Container>
