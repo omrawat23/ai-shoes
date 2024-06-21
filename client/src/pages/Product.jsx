@@ -1,6 +1,5 @@
-import { Add, Remove } from "@material-ui/icons";
+
 import styled from "styled-components";
-// import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
@@ -231,9 +230,9 @@ const Product = () => {
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove onClick={()=>handleQuantity("dec")}/>
+              {/* <Remove onClick={()=>handleQuantity("dec")}/> */}
               <Amount>{quantity}</Amount>
-              <Add onClick={()=>handleQuantity("inc")}/>
+              {/* <Add onClick={()=>handleQuantity("inc")}/> */}
             </AmountContainer>
             <Link to={"/cart"} >
             <Button onClick={handleClick} >ADD TO CART</Button>

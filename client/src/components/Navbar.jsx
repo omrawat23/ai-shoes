@@ -1,5 +1,4 @@
-import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+
 import React from "react";
 import styled from "styled-components";
 // import { mobile } from "../responsive";
@@ -100,7 +99,7 @@ const Navbar = () => {
           <Logo>
           <SearchContainer>
             <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
+            {/* <Search style={{ color: "gray", fontSize: 16 }} /> */}
           </SearchContainer>
           </Logo>
         </Center>
@@ -112,9 +111,9 @@ const Navbar = () => {
           <Link to="/cart">
           <MenuItem>CART
 
-             < Badge overlap="rectangular" badgeContent={quantity}  color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
+             {/* < Badge overlap="rectangular" badgeContent={quantity}  color="primary"> */}
+              {/* <ShoppingCartOutlined /> */}
+            {/* </Badge> */}
           </MenuItem>
           </Link>
         </Right>

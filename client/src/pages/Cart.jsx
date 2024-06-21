@@ -1,4 +1,4 @@
-import { Add, Remove } from "@material-ui/icons";
+
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
@@ -290,9 +290,9 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add onClick={()=>handleQuantity("inc")}/>
+                    {/* <Add onClick={()=>handleQuantity("inc")}/> */}
                     <ProductAmount>{quantity}</ProductAmount>
-                    <Remove onClick={()=>handleQuantity("dec")} />
+                    {/* <Remove onClick={()=>handleQuantity("dec")} /> */}
                   </ProductAmountContainer>
                   <ProductPrice>
                     $ {product.price * product.quantity}
