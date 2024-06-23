@@ -1,6 +1,6 @@
 
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import StripeCheckout from "react-stripe-checkout";
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { updateProductQuantity, removeProduct   } from "../redux/cartRedux";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -219,9 +220,17 @@ const Button = styled.button`
   font-style: normal;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  button {
+    margin: 0 5px; 
+  }
+`;
+
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  const[quantity,setQuantity]=useState(1);
+  const dispatch = useDispatch();
   const [stripeToken, setStripeToken] = useState(null);
   const navigate = useNavigate();
 
@@ -244,12 +253,21 @@ const Cart = () => {
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, navigate]);
 
-  const handleQuantity = (type) => {
-    if (type === "dec") {
-      quantity > 1 && setQuantity(quantity - 1);
-    } else {
-      setQuantity(quantity + 1);
+
+
+  const handleQuantity = (id, type) => {
+    const product = cart.products.find((p) => p._id === id);
+    if (product) {
+      if (type === "dec" && product.quantity > 1) {
+        dispatch(updateProductQuantity({ id, quantity: product.quantity - 1 }));
+      } else if (type === "inc") {
+        dispatch(updateProductQuantity({ id, quantity: product.quantity + 1 }));
+      }
     }
+  };
+
+  const handleDelete = (id) => {
+    dispatch(removeProduct({ id }));
   };
 
 
@@ -271,8 +289,8 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product) => (
-              <Product>
+          {cart.products.map((product) => (
+              <Product key={product._id}>
                 <ProductDetail>
                   <Image src={product.img} />
                   <Details>
@@ -290,12 +308,15 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    {/* <Add onClick={()=>handleQuantity("inc")}/> */}
-                    <ProductAmount>{quantity}</ProductAmount>
-                    {/* <Remove onClick={()=>handleQuantity("dec")} /> */}
+                    <ButtonContainer>
+                  <button onClick={() => handleQuantity(product._id, "inc")}>➕</button>
+                  <ProductAmount>{product.quantity}</ProductAmount>
+                    <button onClick={() => handleQuantity(product._id, "dec")}>➖</button>
+                    <button onClick={() => handleDelete(product._id)}>❌</button> 
+                    </ButtonContainer>
                   </ProductAmountContainer>
                   <ProductPrice>
-                    $ {product.price * product.quantity}
+                  $ {product.price * product.quantity}
                   </ProductPrice>
                 </PriceDetail>
               </Product>

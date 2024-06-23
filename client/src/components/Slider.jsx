@@ -99,7 +99,7 @@ const Slider = () => {
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
-        {/* <ArrowLeftOutlined /> */}
+       <p>↩</p>
       </Arrow>
       <Wrapper slide={slideIndex}>
         {sliderItems.map((item) => (
@@ -118,7 +118,7 @@ const Slider = () => {
         ))}
       </Wrapper>
       <Arrow direction="right" onClick={() => handleClick("right")}>
-        {/* <ArrowRightOutlined /> */}
+        <p>↪</p>
       </Arrow>
     </Container>
   );

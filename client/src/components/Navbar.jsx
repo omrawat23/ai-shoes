@@ -98,22 +98,17 @@ const Navbar = () => {
           
           <Logo>
           <SearchContainer>
-            <Input placeholder="Search" />
-            {/* <Search style={{ color: "gray", fontSize: 16 }} /> */}
+            <Input placeholder="🔍 Search" />
           </SearchContainer>
           </Logo>
         </Center>
         <Right>
-          <MenuItem>MY FAVOURITES</MenuItem>
+          <MenuItem>💗 MY FAVOURITES</MenuItem>
           <Link to="/login">
-          <MenuItem>SIGN IN</MenuItem>
+          <MenuItem>🔖SIGN IN</MenuItem>
           </Link>
           <Link to="/cart">
-          <MenuItem>CART
-
-             {/* < Badge overlap="rectangular" badgeContent={quantity}  color="primary"> */}
-              {/* <ShoppingCartOutlined /> */}
-            {/* </Badge> */}
+          <MenuItem>🛒 CART
           </MenuItem>
           </Link>
         </Right>

@@ -72,24 +72,28 @@ const Icon = styled.div`
 
 const Product = ({ item }) => {
   return (
+    
+   
     <Container>
       <Circle />
-      <Image src={item.img} />
+      <Image src={item.img}/>
       <Info>
         <Icon>
-         
-          
+        <Link to="/cart">
+        <p>🛒</p>
+        </Link>
         </Icon>
         <Icon>
           <Link to={`/product/${item._id}`}>
-          
+          <p>🔍</p>
           </Link>
         </Icon>
         <Icon>
-        
+        <p>💗</p>
         </Icon>
       </Info>
     </Container>
+    
   );
 };
 

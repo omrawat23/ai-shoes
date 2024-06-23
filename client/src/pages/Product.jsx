@@ -6,7 +6,7 @@ import Newsletter from "../components/Newsletter";
 import { publicRequest } from "../requestMethods";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { addProduct } from "../redux/cartRedux";
+import { addProduct,updateProductQuantity  } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { Link } from "react-router-dom";
@@ -185,9 +185,15 @@ const Product = () => {
     getProduct();
   }, [id]);
 
+  useEffect(() => {
+    if (product._id) {
+      dispatch(updateProductQuantity({ id: product._id, quantity }));
+    }
+  }, [quantity, dispatch, product._id]);
+
   const handleQuantity = (type) => {
     if (type === "dec") {
-      quantity > 1 && setQuantity(quantity - 1);
+      if (quantity > 1) setQuantity(quantity - 1);
     } else {
       setQuantity(quantity + 1);
     }
@@ -198,6 +204,7 @@ const Product = () => {
       addProduct({ ...product, quantity, color, size })
     );
   };
+
   return (
     <Container>
       <Navbar />
@@ -230,9 +237,9 @@ const Product = () => {
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              {/* <Remove onClick={()=>handleQuantity("dec")}/> */}
+              <button onClick={()=>handleQuantity("dec")}>➖</button>
               <Amount>{quantity}</Amount>
-              {/* <Add onClick={()=>handleQuantity("inc")}/> */}
+              <button onClick={()=>handleQuantity("inc")}>➕</button>
             </AmountContainer>
             <Link to={"/cart"} >
             <Button onClick={handleClick} >ADD TO CART</Button>
