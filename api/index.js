@@ -12,12 +12,15 @@ const cors = require("cors");
 
 dotenv.config();
 
-mongoose
-  .connect('mongodb+srv://or63529:63QYF3wjMX7BYo9y@cluster0.xwxcard.mongodb.net/')
-  .then(() => console.log("DB Connection Successfull!"))
-  .catch((err) => {
-    console.log(err);
-  });
+const directURI = 'mongodb+srv://or63529:63QYF3wjMX7BYo9y@cluster0.xwxcard.mongodb.net/';
+mongoose.connect(directURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("DB Connection Successful!"))
+.catch((err) => {
+  console.error("DB Connection Error:", err);
+});
 
 app.use(cors());
 app.use(express.json());
