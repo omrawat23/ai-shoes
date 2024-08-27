@@ -218,7 +218,7 @@ const Product = () => {
         <InfoContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
-          <Link to = 'https://try.deepar.ai/foot/nike-air-jordan-miles-morales'><button>Virtual try-on</button></Link><br/>
+          <Link to = 'https://try.deepar.ai/foot/nike-air-jordan-miles-morales'><Button>Virtual try-on</Button></Link><br/>
           <Price>$ {product.price}</Price>
           <FilterContainer>
             <Filter>
