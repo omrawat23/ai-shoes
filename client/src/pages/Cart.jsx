@@ -9,6 +9,8 @@ import { userRequest } from "../requestMethods";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { updateProductQuantity, removeProduct   } from "../redux/cartRedux";
+import { mobile } from "../responsive";
+
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -20,7 +22,7 @@ const Wrapper = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
-
+  ${mobile({ padding: "10px" })}
 `;
 
 const Title = styled.h1`
@@ -58,7 +60,7 @@ const TopTexts = styled.div`
 font-family: "Titillium Web", sans-serif;
 font-weight: 700;
 font-style: normal;
- 
+   ${mobile({ display: "none" })}
 `;
 const TopText = styled.span`
   text-decoration: underline;
@@ -75,7 +77,7 @@ const Bottom = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
-  
+    ${mobile({ flexDirection: "column" })}
 
 `;
 
@@ -92,6 +94,7 @@ const Product = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
+    ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -155,7 +158,7 @@ const ProductAmount = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
-
+  ${mobile({ margin: "5px 15px" })}
 `;
 
 const ProductPrice = styled.div`
@@ -164,7 +167,7 @@ const ProductPrice = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
-
+  ${mobile({ marginBottom: "20px" })}
 `;
 
 const Hr = styled.hr`

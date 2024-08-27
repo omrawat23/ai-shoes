@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'; 
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -22,7 +23,7 @@ const Wrapper = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
-
+ ${mobile({ width: "75%" })}
 `;
 
 const Title = styled.h1`
