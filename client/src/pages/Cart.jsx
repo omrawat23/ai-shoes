@@ -281,7 +281,7 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <Link to="/products/women">
+          <Link to="/products/shoes">
           <TopButton>CONTINUE SHOPPING</TopButton>
           </Link>
           <TopTexts>
