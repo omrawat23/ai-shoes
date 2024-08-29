@@ -12,7 +12,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 
-const KEY =process.env.REACT_APP_STRIPE;
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 
