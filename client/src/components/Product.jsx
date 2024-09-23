@@ -21,9 +21,8 @@ const Info = styled.div`
 
 const Container = styled.div`
   flex: 1;
-  margin: 5px;
   min-width: 280px;
-  height: 350px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,12 +47,6 @@ const Image = styled.img`
   z-index: 2;
 `;
 
-const Images = styled.img`
-  width: 10%;
-  height: 10%;
-`;
-
-
 const Icon = styled.div`
   width: 40px;
   height: 40px;
@@ -72,8 +65,6 @@ const Icon = styled.div`
 
 const Product = ({ item }) => {
   return (
-    
-   
     <Container>
       <Circle />
       <Image src={item.img}/>
