@@ -5,40 +5,50 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { mobile } from "../responsive";
 
-const Container = styled.div``;
+const Container = styled.div`
+  background-color: #e9e8e4;
+`;
 
 const Title = styled.h1`
-
   margin: 20px;
-  padding-left:45%;
-  
+  text-align: center;
 `;
 
 const FilterContainer = styled.div`
   display: flex;
-  padding-left:42%;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 
 const Filter = styled.div`
   margin: 20px;
-   ${mobile({ width: "0px 20px", display: "flex", flexDirection: "column" })}
-  
+  @media only screen and (max-width: 768px) {
+    margin: 10px;
+    width: 100%;
+  }
 `;
 
 const FilterText = styled.span`
   font-size: 20px;
   font-weight: 600;
   margin-right: 20px;
-  ${mobile({ marginRight: "0px" })}
+  @media only screen and (max-width: 768px) {
+    display: block;
+    margin-bottom: 10px;
+  }
 `;
 
 const Select = styled.select`
   padding: 10px;
   margin-right: 20px;
- ${mobile({ margin: "10px 0px" })}
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 `;
+
 const Option = styled.option``;
 
 const ProductList = () => {
@@ -58,7 +68,6 @@ const ProductList = () => {
   return (
     <Container>
       <Navbar />
-
       <Title>Shoes</Title>
       <FilterContainer>
         <Filter>
@@ -71,8 +80,6 @@ const ProductList = () => {
         </Filter>
       </FilterContainer>
       <Products filters={filters} sort={sort} />
-      <Newsletter />
-      <Footer />
     </Container>
   );
 };

@@ -1,15 +1,17 @@
-
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaSignInAlt, FaShoppingCart } from 'react-icons/fa';
 
 const Container = styled.div`
-background-color: #e9e8e4;
-  padding:10px;
+  background-color: #e9e8e4;
+  padding: 0;
   height: 60px;
-   ${mobile({ height: "50px" })}
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  ${mobile({ height: "50px" })}
 `;
 
 const Wrapper = styled.div`
@@ -17,8 +19,8 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-    ${mobile({ padding: "10px 0px" })}
-
+  height: 100%;
+  ${mobile({ padding: "10px 5px" })}
 `;
 
 const Left = styled.div`
@@ -27,42 +29,23 @@ const Left = styled.div`
   align-items: center;
 `;
 
+const Logo = styled.h1`
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+  margin: 0;
+  cursor: pointer;
+  ${mobile({ fontSize: "16px", marginLeft: "10px" })}
+`;
+
 const Language = styled.span`
   font-size: 15px;
   cursor: pointer;
-  font-weight: bold;
-
-  font-family: "Titillium Web", sans-serif;
   font-weight: 700;
-  font-style: normal;
+  margin-left: 20px;
   ${mobile({ display: "none" })}
 `;
 
-const SearchContainer = styled.div`
-  border: 0.5px solid lightgray;
-  display: flex;
-  align-items: center;
-  margin-left: 25px;
-  padding: 5px;
-`;
-
-const Input = styled.input`
-  border: none;
-  ${mobile({ width: "50px" })}
-`;
-
-const Center = styled.div`
-  flex: 1;
-  text-align: center;
-`;
-
-const Logo = styled.h1`
-flex: 1;
-display: flex;
-margin-left: 865px;
-  ${mobile({ fontSize: "24px" })}
-
-`;
 const Right = styled.div`
   flex: 1;
   display: flex;
@@ -75,47 +58,43 @@ const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
-
-    font-family: "Titillium Web", sans-serif;
   font-weight: 700;
-  font-style: normal;
-  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+  position: relative;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  ${mobile({ fontSize: "12px"})}
+
+  svg {
+    margin-right: 5px;
+  }
 `;
 
 const Navbar = () => {
+  const quantity = useSelector((state) => state.cart.quantity);
 
-  const quantity = useSelector(state=>state.cart.quantity)
   return (
-    
     <Container>
       <Wrapper>
         <Left>
-        <Link to="/">
-          <Language>SnapFoot</Language>
-        </Link>
-
-        </Left>
-        <Center>
-          
-          <Logo>
-          <SearchContainer>
-            <Input placeholder="🔍 Search" />
-          </SearchContainer>
-          </Logo>
-        </Center>
-        <Right>
-          <MenuItem>💗 MY FAVOURITES</MenuItem>
-          <Link to="/login">
-          <MenuItem>🔖SIGN IN</MenuItem>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <Logo>SnapFoot</Logo>
           </Link>
-          <Link to="/cart">
-          <MenuItem>🛒 CART
-          </MenuItem>
+        </Left>
+        <Right>
+          <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <MenuItem>
+              <FaSignInAlt /> SIGN IN
+            </MenuItem>
+          </Link>
+          <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <MenuItem>
+              <FaShoppingCart /> CART {quantity > 0 && <span>({quantity})</span>}
+            </MenuItem>
           </Link>
         </Right>
       </Wrapper>
     </Container>
-    
   );
 };
 

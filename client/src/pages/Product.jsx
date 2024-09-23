@@ -14,7 +14,8 @@ import { mobile } from "../responsive";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
-const Container = styled.div``;
+const Container = styled.div`
+  background-color: #e9e8e4;`;
 
 const Wrapper = styled.div`
   padding: 50px;
@@ -249,8 +250,6 @@ const Product = () => {
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Newsletter />
-      <Footer />
     </Container>
   );
 };

@@ -1,6 +1,7 @@
 
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import { FaPlus, FaMinus, FaTimes } from 'react-icons/fa';
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import StripeCheckout from "react-stripe-checkout";
@@ -41,6 +42,7 @@ const Top = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
+  ${mobile({ flexDirection: "column", gap: "10px" })}
 `;
 
 const TopButton = styled.button`
@@ -54,14 +56,16 @@ const TopButton = styled.button`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
+  ${mobile({ width: "100%" })}
 `;
 
 const TopTexts = styled.div`
-font-family: "Titillium Web", sans-serif;
-font-weight: 700;
-font-style: normal;
-   ${mobile({ display: "none" })}
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  ${mobile({ display: "none" })}
 `;
+
 const TopText = styled.span`
   text-decoration: underline;
   cursor: pointer;
@@ -77,8 +81,7 @@ const Bottom = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
-    ${mobile({ flexDirection: "column" })}
-
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Info = styled.div`
@@ -94,7 +97,7 @@ const Product = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
-    ${mobile({ flexDirection: "column" })}
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -103,10 +106,12 @@ const ProductDetail = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
+  ${mobile({ flexDirection: "column", alignItems: "center" })}
 `;
 
 const Image = styled.img`
   width: 200px;
+  ${mobile({ width: "100%", maxWidth: "200px" })}
 `;
 
 const Details = styled.div`
@@ -117,6 +122,7 @@ const Details = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
+  ${mobile({ padding: "10px", alignItems: "center", textAlign: "center" })}
 `;
 
 const ProductName = styled.span``;
@@ -188,6 +194,7 @@ const Summary = styled.div`
   font-family: "Titillium Web", sans-serif;
   font-weight: 700;
   font-style: normal;
+  ${mobile({ marginTop: "20px" })}
 `;
 
 const SummaryTitle = styled.h1`
@@ -227,8 +234,9 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   button {
-    margin: 0 5px; 
+    margin: 0 5px;
   }
+  ${mobile({ justifyContent: "center" })}
 `;
 
 const Cart = () => {
@@ -284,11 +292,6 @@ const Cart = () => {
           <Link to="/products/shoes">
           <TopButton>CONTINUE SHOPPING</TopButton>
           </Link>
-          <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
-          </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -298,12 +301,8 @@ const Cart = () => {
                   <Image src={product.img} />
                   <Details>
                     <ProductName>
-                      <b>Product:</b> {product.title}
+                      {product.title}
                     </ProductName>
-                    <ProductId>
-                      <b>ID:</b> {product._id}
-                    </ProductId>
-                    <ProductColor color={product.color} />
                     <ProductSize>
                       <b>Size:</b> {product.size}
                     </ProductSize>

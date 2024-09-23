@@ -9,14 +9,14 @@ export const sliderItems = [
   {
     id: 1,
     img: "/img/2.png", 
-    title: "AUTUMN COLLECTION",
+    title: "AUTUMN SALE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fcf1ed",
   },
   {
     id: 3,
     img: "/img/3.png", 
-    title: "FALL COLLECTION",
+    title: "FALL SALE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fbf0f4",
   },
