@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Products from "../components/Products";
-import Newsletter from "../components/Newsletter";
-import Footer from "../components/Footer";
 
 const Container = styled.div`
   background-color: #e9e8e4;
@@ -59,7 +57,7 @@ const ProductList = () => {
   const location = useLocation();
   const category = location.pathname.split("/")[2];
   const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState("newest");
+  const [sort, setSort] = useState("popular");
 
   const handleFilters = (e) => {
     const value = e.target.value;
@@ -77,7 +75,8 @@ const ProductList = () => {
         <FilterContainer>
           <Filter>
             <FilterText>Sort Products:</FilterText>
-            <Select onChange={(e) => setSort(e.target.value)}>
+            <Select value={sort} onChange={(e) => setSort(e.target.value)}>
+              <Option value="popular">Popular</Option>
               <Option value="newest">Newest</Option>
               <Option value="asc">Price (asc)</Option>
               <Option value="desc">Price (desc)</Option>

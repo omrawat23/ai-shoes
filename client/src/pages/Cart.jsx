@@ -1,7 +1,6 @@
 
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { FaPlus, FaMinus, FaTimes } from 'react-icons/fa';
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import StripeCheckout from "react-stripe-checkout";
@@ -254,12 +253,18 @@ const Cart = () => {
       try {
         const res = await userRequest.post("/checkout/payment", {
           tokenId: stripeToken.id,
-          amount: 500,
+          amount: cart.total * 100, // Assuming the amount should be in cents
         });
-        navigate.push("/success", {
-          stripeData: res.data,
-          products: cart, });
-      } catch {}
+        navigate("/success", {
+          state: {
+            stripeData: res.data,
+            cart: cart,
+          }
+        });
+      } catch (err) {
+        console.error("Payment error:", err);
+        // Handle the error appropriately
+      }
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, navigate]);

@@ -1,15 +1,13 @@
 import styled from "styled-components";
-import { popularProducts } from "../data";
 import Product from "./Product";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { userRequest } from "../requestMethods";
 
 const Container = styled.div`
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 const Products = ({ cat, filters, sort }) => {
@@ -20,50 +18,53 @@ const Products = ({ cat, filters, sort }) => {
     const getProducts = async () => {
       try {
         const res = await userRequest.get(
-          cat
-            ? `/products?category=${cat}`
-            : "/products"
+          cat ? `/products?category=${cat}` : "/products"
         );
         setProducts(res.data);
-      } catch (err) {}
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
     };
     getProducts();
   }, [cat]);
 
   useEffect(() => {
-    cat &&
+    if (cat) {
       setFilteredProducts(
         products.filter((item) =>
           Object.entries(filters).every(([key, value]) =>
-            item[key].includes(value)
+            item[key]?.toLowerCase().includes(value.toLowerCase())
           )
         )
       );
+    } else {
+      setFilteredProducts(products);
+    }
   }, [products, cat, filters]);
 
   useEffect(() => {
-    if (sort === "newest") {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => a.createdAt - b.createdAt)
-      );
-    } else if (sort === "asc") {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => a.price - b.price)
-      );
+    if (sort === "popular") {
+      setFilteredProducts(products);
     } else {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => b.price - a.price)
-      );
+      setFilteredProducts((prev) => {
+        const sortedProducts = [...prev];
+        if (sort === "newest") {
+          sortedProducts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        } else if (sort === "asc") {
+          sortedProducts.sort((a, b) => a.price - b.price);
+        } else if (sort === "desc") {
+          sortedProducts.sort((a, b) => b.price - a.price);
+        }
+        return sortedProducts;
+      });
     }
-  }, [sort]);
+  }, [sort, products]);
 
   return (
     <Container>
-      {cat
-        ? filteredProducts.map((item) => <Product item={item} key={item.id} />)
-        : products
-            .slice(0, 8)
-            .map((item) => <Product item={item} key={item.id} />)}
+      {filteredProducts.slice(0, 8).map((item) => (
+        <Product item={item} key={item.id} />
+      ))}
     </Container>
   );
 };
