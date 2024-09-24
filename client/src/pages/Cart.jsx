@@ -253,18 +253,12 @@ const Cart = () => {
       try {
         const res = await userRequest.post("/checkout/payment", {
           tokenId: stripeToken.id,
-          amount: cart.total * 100, // Assuming the amount should be in cents
+          amount: 500,
         });
-        navigate("/success", {
-          state: {
-            stripeData: res.data,
-            cart: cart,
-          }
-        });
-      } catch (err) {
-        console.error("Payment error:", err);
-        // Handle the error appropriately
-      }
+        navigate.push("/success", {
+          stripeData: res.data,
+          products: cart, });
+      } catch {}
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, navigate]);
