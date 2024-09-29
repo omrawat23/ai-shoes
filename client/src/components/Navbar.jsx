@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { FaSignInAlt, FaShoppingCart } from 'react-icons/fa';
+import { logout } from "../redux/userRedux"; // Adjust the import as needed
 
 const Container = styled.div`
   background-color: #e9e8e4;
@@ -38,14 +39,6 @@ const Logo = styled.h1`
   ${mobile({ fontSize: "16px", marginLeft: "10px" })}
 `;
 
-const Language = styled.span`
-  font-size: 15px;
-  cursor: pointer;
-  font-weight: 700;
-  margin-left: 20px;
-  ${mobile({ display: "none" })}
-`;
-
 const Right = styled.div`
   flex: 1;
   display: flex;
@@ -72,6 +65,14 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); 
+
+  const handleLogout = () => {
+    dispatch(logout()); 
+    navigate("/"); 
+  };
 
   return (
     <Container>
@@ -82,16 +83,25 @@ const Navbar = () => {
           </Link>
         </Left>
         <Right>
-          <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <MenuItem>
-              <FaSignInAlt /> SIGN IN
-            </MenuItem>
-          </Link>
-          <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <MenuItem>
-              <FaShoppingCart /> CART {quantity > 0 && <span>({quantity})</span>}
-            </MenuItem>
-          </Link>
+          {currentUser ? (
+            <>
+              <MenuItem onClick={handleLogout}>
+                LOG OUT
+              </MenuItem>
+
+            </>
+          ) : (
+            <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <MenuItem>
+                <FaSignInAlt /> SIGN IN
+              </MenuItem>
+            </Link>
+          )}
+              <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <MenuItem>
+                  <FaShoppingCart /> CART {quantity > 0 && <span>({quantity})</span>}
+                </MenuItem>
+              </Link>
         </Right>
       </Wrapper>
     </Container>
